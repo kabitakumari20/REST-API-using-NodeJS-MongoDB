@@ -27,6 +27,16 @@ app.post("/students",(req,res)=>{
     })
     // res.send("Hello This is Manvi Mayuriya")
 })
+app.get("/getdata",(req,res)=>{
+    //res.send("Hello This is Manvi Mayuriya")
+    const getData = async () => {
+        const result = await Student.find()
+        console.log(result)
+        res.send(result)
+    }
+    getData()
+})
+
 
 app.listen(port,()=>{
     console.log(`connection is successfully ${port}`)
