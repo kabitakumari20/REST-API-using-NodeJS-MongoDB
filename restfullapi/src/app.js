@@ -50,6 +50,33 @@ app.get("/mens/:id",async(req,res)=>{
 })
 
 
+// update data -----------------------
+
+app.patch("/mens/:id",async(req,res)=>{
+    try{
+        const _id = req.params.id;
+        const getMen = await Student.findByIdAndUpdate(_id,req.body,{
+        new: true
+        })
+        res.send(getMen);
+    }catch(e){
+        res.status(500).send(e)
+    }
+})
+
+// delete data----------------------------
+
+app.delete("/mens/:id",async(req,res)=>{
+    try{
+        const _id = req.params.id;
+        const getMen = await Student.findByIdAndDelete(_id)
+        res.send(getMen);
+        // res.send("data deleted successfully")
+    }catch(e){
+        res.status(500).send(e)
+    }
+})
+
 
 app.listen(port,()=>{
     console.log(`connection is successfully ${port}`)
