@@ -9,10 +9,7 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json())
 
-app.get("/getdata",(req,res)=>{
-    res.send("Hello This is Manvi Mayuriya")
-})
-
+// insert data -----------------------------------------
 app.post("/students",(req,res)=>{
     console.log(req.body);
     const user = new Student(req.body)
@@ -27,6 +24,9 @@ app.post("/students",(req,res)=>{
     })
     // res.send("Hello This is Manvi Mayuriya")
 })
+
+
+// read all data from data base ---------------------------------
 app.get("/getdata",(req,res)=>{
     //res.send("Hello This is Manvi Mayuriya")
     const getData = async () => {
@@ -36,6 +36,19 @@ app.get("/getdata",(req,res)=>{
     }
     getData()
 })
+
+// read data by id-----------------
+
+app.get("/mens/:id",async(req,res)=>{
+    try{
+        const _id = req.params.id;
+        const getMen = await Student.findById(_id)
+        res.send(getMen);
+    }catch(e){
+        res.status(400).send(e)
+    }
+})
+
 
 
 app.listen(port,()=>{
